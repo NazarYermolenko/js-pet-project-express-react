@@ -21,7 +21,18 @@ function deleteCargo(id) {
     })
 }
 
+function createCargo(cargo) {
+    return fetch(`/cargos`, {
+        method: "POST",
+        headers,
+        body: JSON.stringify(cargo)
+    }).then((response) => {
+        return response.json()
+    })
+}
+
 module.exports = {
     getCargos,
-    deleteCargo
+    deleteCargo,
+    createCargo
 }
