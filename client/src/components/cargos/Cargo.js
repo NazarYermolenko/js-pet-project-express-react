@@ -1,11 +1,7 @@
 import React from "react"
 
 export default class Cargo extends React.Component {
-    constructor(props) {
-        super(props)
-    }
-
-    handleDelete(){
+    handleDelete() {
         this.props.onDelete(this.props.cargo._id)
     }
 

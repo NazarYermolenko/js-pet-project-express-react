@@ -1,13 +1,22 @@
 import React, { Component } from 'react';
-import NavBar from "./components/NavBar"
-import Cargos from "./components/Cargos"
+import { Route } from 'react-router-dom'
+
+import NavBar from "./components/common/NavBar"
+import Cargos from "./components/cargos/Cargos"
+import CreateCargo from "./components/cargos/CreateCargo"
+
 
 class App extends Component {
   render() {
     return (
       <div className="App">
         <NavBar />
-        <Cargos />
+        <Route exact path="/">
+          <Cargos />
+        </Route>
+        <Route path="/create">
+          <CreateCargo />
+        </Route>
       </div>
     );
   }
