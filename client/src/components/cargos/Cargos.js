@@ -1,6 +1,6 @@
 import React from "react"
 
-import Cargo from "./Cargo"
+import Cargo from "./cargo/Cargo"
 import LoadSpinner from "../common/LoadSpinner"
 
 import { getCargos, deleteCargo } from "../../hooks/CargoHooks"

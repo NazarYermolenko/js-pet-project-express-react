@@ -3,8 +3,10 @@ const headers = {
     'Accept': 'application/json'
 }
 
+const endpoint = "/cargos"
+
 function getCargos() {
-    return fetch("/cargos", {
+    return fetch(endpoint, {
         method: "GET",
         headers
     }).then((response) => {
@@ -13,7 +15,7 @@ function getCargos() {
 }
 
 function deleteCargo(id) {
-    return fetch(`/cargos/${id}`, {
+    return fetch(`${endpoint}/${id}`, {
         method: "DELETE",
         headers
     }).then((response) => {
@@ -22,8 +24,18 @@ function deleteCargo(id) {
 }
 
 function createCargo(cargo) {
-    return fetch(`/cargos`, {
+    return fetch(endpoint, {
         method: "POST",
+        headers,
+        body: JSON.stringify(cargo)
+    }).then((response) => {
+        return response.json()
+    })
+}
+
+function editCargo(cargo) {
+    return fetch(endpoint, {
+        method: "PUT",
         headers,
         body: JSON.stringify(cargo)
     }).then((response) => {
@@ -34,5 +46,6 @@ function createCargo(cargo) {
 module.exports = {
     getCargos,
     deleteCargo,
-    createCargo
+    createCargo,
+    editCargo
 }
