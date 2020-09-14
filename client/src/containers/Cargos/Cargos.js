@@ -1,11 +1,13 @@
-import React from "react"
+import React, { Component } from "react"
 
-import Cargo from "./cargo/Cargo"
-import LoadSpinner from "../common/LoadSpinner"
+import Cargo from "../../components/Cargo/Cargo"
+import LoadSpinner from "../../components/LoadSpinner/LoadSpinner"
 
-import { getCargos, deleteCargo } from "../../hooks/CargoHooks"
+import { getCargos, deleteCargo } from "../../utils/CargoUtils"
+import { cargosReceive, cargoDelete } from '../../actions/index'
+import { connect } from 'react-redux'
 
-export default class Cargos extends React.Component {
+class Cargos extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -15,27 +17,26 @@ export default class Cargos extends React.Component {
     }
 
     deleteCargoHandler(id) {
+        const { cargoDeleted: cargoDeletedProps } = this.props
         deleteCargo(id).then((data) => {
             if (data.message) {
-                this.setState({
-                    cargos: this.state.cargos.filter((cargo) => {
-                        return id !== cargo._id
-                    })
-                })
+                cargoDeletedProps(id)
             }
         })
     }
 
     componentDidMount() {
+        const { cargosReceive: cargosReceiveProps } = this.props
         getCargos().then(data => {
+            cargosReceiveProps(data);
             this.setState({
-                cargos: data,
                 loading: false
             })
         })
     }
 
     render() {
+        console.log(this.props.cargos)
         return (
             <main>
                 <div className="container">
@@ -43,7 +44,7 @@ export default class Cargos extends React.Component {
                         {
                             this.state.loading ?
                                 <LoadSpinner /> :
-                                this.state.cargos.map((cargo) => {
+                                this.props.cargos.map((cargo) => {
                                     return <Cargo
                                         cargo={cargo}
                                         key={cargo._id}
@@ -56,3 +57,14 @@ export default class Cargos extends React.Component {
         )
     }
 }
+
+function mapStateToProps(state) {
+    return {
+        cargos: state.cargosStorage.cargos
+    };
+}
+
+export default connect(mapStateToProps, {
+    cargosReceive,
+    cargoDelete
+})(Cargos);

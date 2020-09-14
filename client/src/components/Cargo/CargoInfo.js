@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { Component } from "react"
 
-export default class CargoTitle extends React.Component {
+export default class CargoTitle extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -18,7 +18,7 @@ export default class CargoTitle extends React.Component {
 
     render() {
         return (
-            <div onClick={this.props.changeHandler}
+            <div onClick={this.props.clickToChange}
                 onMouseEnter={this.onMouseEnter.bind(this)}
                 onMouseLeave={this.onMouseLeave.bind(this)}
             >

@@ -1,8 +1,8 @@
-import React from "react"
+import React, { Component } from "react"
 import CargoInfo from "./CargoInfo"
 import ChangeInput from "./ChangeInput"
 
-export default class Cargo extends React.Component {
+export default class Cargo extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -15,7 +15,9 @@ export default class Cargo extends React.Component {
         this.props.onDelete(this.props.cargo._id)
     }
 
-    handleClickButton(e, type) {
+    handleClickButton(e) {
+        console.log(this)
+        
         const parentClass = e.target.parentNode.parentNode.classList[0]
         if (parentClass === 'card-body') {
             if (e.target.type === 'submit') {
@@ -40,10 +42,10 @@ export default class Cargo extends React.Component {
                         {(!this.state.isDisplayedTitleInputArea) ?
                             <CargoInfo
                                 value={this.props.cargo.title}
-                                changeHandler={this.handleClickButton.bind(this)}
+                                clickToChange={this.handleClickButton.bind(this)}
                             /> :
                             <ChangeInput value={this.props.cargo.title}
-                                changeHandler={this.handleClickButton.bind(this)}
+                                clickCloseHandler={this.handleClickButton.bind(this)}
                             />
                         }
                     </div>
@@ -51,10 +53,10 @@ export default class Cargo extends React.Component {
                         {(!this.state.isDisplayedDescriptionInputArea) ?
                             <CargoInfo
                                 value={this.props.cargo.description}
-                                changeHandler={this.handleClickButton.bind(this)}
+                                clickToChange={this.handleClickButton.bind(this)}
                             /> :
                             <ChangeInput value={this.props.cargo.description}
-                                changeHandler={this.handleClickButton.bind(this)}
+                                clickCloseHandler={this.handleClickButton.bind(this)}
                             />
                         }
                         <div className="mt-3">

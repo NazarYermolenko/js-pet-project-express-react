@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { Component } from "react"
 
-export default class ChangeInput extends React.Component {
+export default class ChangeInput extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -22,7 +22,7 @@ export default class ChangeInput extends React.Component {
         return (
             <div className="d-flex">
                 <input className="mr-3" onChange={this.changeHandler.bind(this)} value={this.state.value}></input>
-                <button className="btn btn-danger" onClick={this.props.changeHandler}>X</button>
+                <button className="btn btn-danger" onClick={this.props.clickCloseHandler}>X</button>
             </div>
         )
     }

@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cargos = require('./routes/cargos');
 const bodyParser = require('body-parser');
-const { errorHandler } = require('./routes/general_middleware');
+const { errorHandler } = require('./middleware/general_middleware');
 
 app = express()
 PORT = process.env.PORT || 5000

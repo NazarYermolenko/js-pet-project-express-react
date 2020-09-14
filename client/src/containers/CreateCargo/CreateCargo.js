@@ -1,9 +1,9 @@
-import React from 'react'
-import LoadSpinner from '../common/LoadSpinner'
+import React, { Component } from "react"
+import LoadSpinner from '../../components/LoadSpinner/LoadSpinner'
 import { Link } from 'react-router-dom'
-import { createCargo } from '../../hooks/CargoHooks'
+import { createCargo } from '../../utils/CargoUtils'
 
-export default class CreateCargo extends React.Component {
+export default class CreateCargo extends Component {
     constructor(props) {
         super(props)
         this.state = {
