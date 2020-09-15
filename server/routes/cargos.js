@@ -10,6 +10,12 @@ router.get("/cargos", (req, res) => {
     )
 });
 
+router.get("/cargos/:id", (req, res) => {
+    Cargo.findById(req.params.id).then((data) => {
+        res.status(200).send(data)
+    })
+});
+
 router.post("/cargos", (req, res, next) => {
     if (!req.body.title || !req.body.description) {
         next(`Wrong body for creation of cargo.

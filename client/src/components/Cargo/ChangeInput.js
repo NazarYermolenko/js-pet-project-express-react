@@ -6,16 +6,16 @@ export default class ChangeInput extends Component {
         this.state = {
             changed: false,
             value: '',
-            type: "input"
         }
-    }
-
-    changeHandler(e) {
-        this.setState({ value: e.target.value })
     }
 
     componentDidMount() {
         this.setState({ value: this.props.value })
+    }
+
+    changeHandler(e) {
+        this.props.changeValueHandler(this.props.type, e.target.value)
+        this.setState({value:e.target.value})
     }
 
     render() {

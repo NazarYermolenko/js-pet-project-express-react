@@ -16,20 +16,27 @@ class Cargos extends Component {
     }
 
     deleteCargoHandler(id) {
-        const { cargoDelete : cargoDeleteProps } = this.props
+        const { cargoDelete: cargoDeleteProps } = this.props
         deleteCargo(id).then(() => {
             cargoDeleteProps(id)
         })
     }
 
-    componentDidMount() {
-        const { cargosReceive : cargoReceiveProps } = this.props
+    updateCargos() {
+        const { cargosReceive: cargoReceiveProps } = this.props
+        this.setState({
+            loading: true
+        })
         getCargos().then(data => {
             cargoReceiveProps(data);
             this.setState({
                 loading: false
             })
         })
+    }
+
+    componentDidMount() {
+        this.updateCargos()
     }
 
     render() {
@@ -44,7 +51,8 @@ class Cargos extends Component {
                                     return <Cargo
                                         cargo={cargo}
                                         key={cargo._id}
-                                        onDelete={this.deleteCargoHandler.bind(this)} />
+                                        onDelete={this.deleteCargoHandler.bind(this)}
+                                        updateHandler={this.updateCargos.bind(this)} />
                                 })
                         }
                     </div>

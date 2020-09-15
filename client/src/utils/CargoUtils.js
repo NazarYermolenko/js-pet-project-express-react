@@ -14,6 +14,15 @@ function getCargos() {
     })
 }
 
+function getCargo(id) {
+    return fetch(`${endpoint}/${id}`, {
+        method: "GET",
+        headers
+    }).then((response) => {
+        return response.json()
+    })
+}
+
 function deleteCargo(id) {
     return fetch(`${endpoint}/${id}`, {
         method: "DELETE",
@@ -33,8 +42,8 @@ function createCargo(cargo) {
     })
 }
 
-function editCargo(cargo) {
-    return fetch(endpoint, {
+function updateCargo(cargo) {
+    return fetch(`${endpoint}/${cargo._id}`, {
         method: "PUT",
         headers,
         body: JSON.stringify(cargo)
@@ -45,7 +54,8 @@ function editCargo(cargo) {
 
 module.exports = {
     getCargos,
+    getCargo,
     deleteCargo,
     createCargo,
-    editCargo
+    updateCargo
 }
