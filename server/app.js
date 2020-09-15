@@ -3,13 +3,16 @@ const mongoose = require('mongoose');
 const cargos = require('./routes/cargos');
 const bodyParser = require('body-parser');
 const { errorHandler } = require('./middleware/general_middleware');
+const config = require('config')
 
-app = express()
-PORT = process.env.PORT || 5000
+const app = express()
+
+const PORT = config.get("PORT") || 5000
+const DBHOST = config.get('DBHOST')
 
 async function start() {
     try {
-        await mongoose.connect('mongodb://localhost:27017/AppDB', {
+        await mongoose.connect(DBHOST, {
             useNewUrlParser: true,
             useUnifiedTopology: true
         });
