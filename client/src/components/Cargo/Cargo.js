@@ -15,22 +15,13 @@ export default class Cargo extends Component {
         this.props.onDelete(this.props.cargo._id)
     }
 
-    handleClickButton(e) {
-        console.log(this)
-        
-        const parentClass = e.target.parentNode.parentNode.classList[0]
-        if (parentClass === 'card-body') {
-            if (e.target.type === 'submit') {
-               this.setState({ isDisplayedDescriptionInputArea: false })
-            } else {
-                this.setState({ isDisplayedDescriptionInputArea: true })
-            }
-        } else {
-            if (e.target.type === 'submit') {
-               this.setState({ isDisplayedTitleInputArea: false })
-            } else {
-                this.setState({ isDisplayedTitleInputArea: true })
-            }
+    handleClick(type) {
+        switch (type) {
+            case 'title': this.setState({ isDisplayedTitleInputArea: true }); break;
+            case 'title-close': this.setState({ isDisplayedTitleInputArea: false }); break;
+            case 'description': this.setState({ isDisplayedDescriptionInputArea: true }); break;
+            case 'description-close': this.setState({ isDisplayedDescriptionInputArea: false }); break;
+            default: this.setState({ isDisplayedDescriptionInputArea: false, isDisplayedTitleInputArea: false })
         }
     }
 
@@ -41,22 +32,24 @@ export default class Cargo extends Component {
                     <div className="card-header">
                         {(!this.state.isDisplayedTitleInputArea) ?
                             <CargoInfo
+                                ref={this.titleRef}
                                 value={this.props.cargo.title}
-                                clickToChange={this.handleClickButton.bind(this)}
+                                clickToChange={this.handleClick.bind(this, "title")}
                             /> :
                             <ChangeInput value={this.props.cargo.title}
-                                clickCloseHandler={this.handleClickButton.bind(this)}
+                                clickCloseHandler={this.handleClick.bind(this, 'title-close')}
                             />
                         }
                     </div>
                     <div className="card-body">
                         {(!this.state.isDisplayedDescriptionInputArea) ?
                             <CargoInfo
+                                ref={this.descriptionRef}
                                 value={this.props.cargo.description}
-                                clickToChange={this.handleClickButton.bind(this)}
+                                clickToChange={this.handleClick.bind(this, "description")}
                             /> :
                             <ChangeInput value={this.props.cargo.description}
-                                clickCloseHandler={this.handleClickButton.bind(this)}
+                                clickCloseHandler={this.handleClick.bind(this, "description-close")}
                             />
                         }
                         <div className="mt-3">

@@ -11,24 +11,21 @@ class Cargos extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            cargos: [],
             loading: true
         }
     }
 
     deleteCargoHandler(id) {
-        const { cargoDeleted: cargoDeletedProps } = this.props
-        deleteCargo(id).then((data) => {
-            if (data.message) {
-                cargoDeletedProps(id)
-            }
+        const { cargoDelete : cargoDeleteProps } = this.props
+        deleteCargo(id).then(() => {
+            cargoDeleteProps(id)
         })
     }
 
     componentDidMount() {
-        const { cargosReceive: cargosReceiveProps } = this.props
+        const { cargosReceive : cargoReceiveProps } = this.props
         getCargos().then(data => {
-            cargosReceiveProps(data);
+            cargoReceiveProps(data);
             this.setState({
                 loading: false
             })
@@ -36,7 +33,6 @@ class Cargos extends Component {
     }
 
     render() {
-        console.log(this.props.cargos)
         return (
             <main>
                 <div className="container">

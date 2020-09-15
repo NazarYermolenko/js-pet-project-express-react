@@ -21,8 +21,10 @@ export default class ChangeInput extends Component {
     render() {
         return (
             <div className="d-flex">
-                <input className="mr-3" onChange={this.changeHandler.bind(this)} value={this.state.value}></input>
-                <button className="btn btn-danger" onClick={this.props.clickCloseHandler}>X</button>
+                <div className="input-group">
+                    <input className="mr-3" onChange={this.changeHandler.bind(this)} value={this.state.value}></input>
+                    <button className="btn btn-danger" onClick={this.props.clickCloseHandler}>X</button>
+                </div>
             </div>
         )
     }
