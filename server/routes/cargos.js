@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const Cargo = require('../models/cargo')
+const Cargo = require('../models/Cargo')
 
 const router = Router()
 
@@ -47,7 +47,6 @@ router.put("/:id", (req, res, next) => {
             if (data) {
                 data.updateOne(req.body).then((updated) => {
                     if (updated.ok) {
-                        console.log(updated)
                         Cargo.findById(cargoId).then((data) => {
                             res.status(200).json(data)
                         })

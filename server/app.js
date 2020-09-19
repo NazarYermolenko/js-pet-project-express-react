@@ -13,19 +13,21 @@ async function start() {
     try {
         await mongoose.connect(DBHOST, {
             useNewUrlParser: true,
-            useUnifiedTopology: true
+            useUnifiedTopology: true,
+            useCreateIndex: true
         });
         app.listen(PORT, () => {
             console.log(`App is listening on port ${PORT}...`)
         });
     } catch (e) {
-        console.log(e);
+        console.log("Error:", e);
     }
 }
 
 app.use(express.json())
 app.use(bodyParser.json())
 
+app.use("/api/auth", require(`./routes/auth`))
 app.use("/api/cargos/", require('./routes/cargos'));
 
 app.use(errorHandler)

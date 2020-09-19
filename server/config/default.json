@@ -1,4 +1,6 @@
 {
     "PORT": "5000",
-    "DBHOST": "mongodb://localhost:27017/AppDB"
+    "DBHOST": "mongodb://localhost:27017/AppDB",
+    "SALT": 12,
+    "JWT_SECRET": "secretststststs"
 }
