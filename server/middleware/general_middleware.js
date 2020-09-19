@@ -1,10 +1,12 @@
 function errorHandler(err, req, res, next) {
-    req.headers = { "content-type": "application/json" }
+    res.headers = { "content-type": "application/json" }
     if (err) {
-        console.error(err)
-        res.status(500).json({"message": err})
+        if(!err.status || !err.message){
+            res.status(500).json({message: "Error raised while exception handling message hasn't been defined"})
+        }
+        res.status(err.status).json(err)
     }
-    next()
+    next(err)
 }
 
 module.exports = {

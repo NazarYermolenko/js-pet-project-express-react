@@ -11,6 +11,7 @@ export default class Cargo extends Component {
             isDisplayedDescriptionInputArea: false,
             changedCargo: {
                 _id: props.cargo._id,
+                title: props.cargo.title,
                 description: props.cargo.description
             }
         }
@@ -35,6 +36,7 @@ export default class Cargo extends Component {
         switch (type) {
             case 'title': updatedCargo.title = value; break;
             case 'description': updatedCargo.description = value; break;
+            default: updatedCargo.title = this.props.cargo.title;
         }
     }
 

@@ -1,6 +1,5 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const cargos = require('./routes/cargos');
 const bodyParser = require('body-parser');
 const { errorHandler } = require('./middleware/general_middleware');
 const config = require('config')
@@ -26,7 +25,9 @@ async function start() {
 
 app.use(express.json())
 app.use(bodyParser.json())
-app.use(cargos);
+
+app.use("/api/cargos/", require('./routes/cargos'));
+
 app.use(errorHandler)
 
 
