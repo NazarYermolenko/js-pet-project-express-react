@@ -8,8 +8,8 @@ const { userChecks, userValidationHandler } = require('../lib/validator')
 
 const router = Router()
 
-const salt = config.get('SALT')
 const secret = config.get('JWT_SECRET')
+const saltRounds = 10
 
 router.post("/login", userChecks,
     (req, res, next) => {
@@ -19,7 +19,6 @@ router.post("/login", userChecks,
         User.findOne({ email }).then((user) => {
             if (user) {
                 bcrypt.compare(password, user.password).then((successfull) => {
-                    console.log(user)
                     if (successfull) {
                         const token = jwt.sign(
                             { userId: user._id },
@@ -45,7 +44,7 @@ router.post("/register", userChecks,
             if (user) {
                 next({ status: "400", message: `Registration error` })
             } else {
-                bcrypt.hash(password, salt).then((hashedPassword) => {
+                bcrypt.hash(password, saltRounds).then((hashedPassword) => {
                     User.create({ email, password: hashedPassword }).then((user) => {
                         res.status(200).json(user)
                     })
