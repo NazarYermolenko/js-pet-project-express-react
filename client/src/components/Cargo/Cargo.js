@@ -51,25 +51,25 @@ export default class Cargo extends Component {
 
     render() {
         return (
-            <div className="col mb-4">
-                <div className="card">
-                    <div className="card-header">
-                        {(!this.state.isDisplayedTitleInputArea) ?
-                            <CargoInfo
-                                value={this.props.cargo.title}
-                                clickToChange={this.handleClick.bind(this, "title")}
-                            /> :
-                            <ChangeInput value={this.props.cargo.title}
-                                id={this.props.cargo._id}
-                                type={'title'}
-                                clickCloseHandler={this.handleClick.bind(this, 'title-close')}
-                                changeValueHandler={this.handleChange.bind(this)}
-                            />
-                        }
-                    </div>
-                    <div className="card-body">
+            <div className="card">
+                <div className="card-content">
+                    {(!this.state.isDisplayedTitleInputArea) ?
+                        <CargoInfo
+                            type={"title"}
+                            value={this.props.cargo.title}
+                            clickToChange={this.handleClick.bind(this, "title")}
+                        /> :
+                        <ChangeInput value={this.props.cargo.title}
+                            id={this.props.cargo._id}
+                            type={'title'}
+                            clickCloseHandler={this.handleClick.bind(this, 'title-close')}
+                            changeValueHandler={this.handleChange.bind(this)}
+                        />
+                    }
+                    <div>
                         {(!this.state.isDisplayedDescriptionInputArea) ?
                             <CargoInfo
+                                type={'description'}
                                 value={this.props.cargo.description}
                                 clickToChange={this.handleClick.bind(this, "description")}
                             /> :
@@ -80,11 +80,13 @@ export default class Cargo extends Component {
                                 changeValueHandler={this.handleChange.bind(this)}
                             />
                         }
-                        <div className="mt-3">
-                            {(this.state.isDisplayedTitleInputArea || this.state.isDisplayedDescriptionInputArea) ?
-                                <button className="btn btn-secondary" onClick={this.handleUpdateCargo.bind(this)}>Update</button>
-                                : <button className="btn btn-primary" onClick={this.handleDelete.bind(this, this.props.cargo._id)}>Delete</button>
-                            }
+                        <div>
+                            <div className="card-action">
+                                {(this.state.isDisplayedTitleInputArea || this.state.isDisplayedDescriptionInputArea) ?
+                                    <button className="btn btn-secondary" onClick={this.handleUpdateCargo.bind(this)}>Update</button>
+                                    : <button className="btn btn-primary" onClick={this.handleDelete.bind(this, this.props.cargo._id)}>Delete</button>
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 
-export default class CargoTitle extends Component {
+export default class CargoInfo extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -22,11 +22,16 @@ export default class CargoTitle extends Component {
                 onMouseEnter={this.onMouseEnter.bind(this)}
                 onMouseLeave={this.onMouseLeave.bind(this)}
             >
+                {(this.props.type === 'title') ?
+                    <h5>Title: </h5> :
+                    <h5>Description: </h5>
+                }
                 {(this.state.isHover) ?
-                    <div>
+                    <p>
                         {this.props.value} <span className="badge badge-info">(click to change)</span>
-                    </div>
-                    : this.props.value}
+                    </p>
+                    :
+                    <p>{this.props.value}</p>}
             </div>
         )
     }
