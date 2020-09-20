@@ -6,19 +6,21 @@ export default class NavBar extends React.Component {
     render() {
         return (
             <header>
-                <nav className="nav-extended">
-                    <div className="nav-wrapper">
-                        <Link to={"/"} className="brand-logo">
-                            <strong>Online Shop</strong>
-                        </Link>
-                    </div>
-                    <div className="nav-content teal lighten-2">
-                        <ul className="tabs tabs-transparent">
-                            <li className="tab col s3"><Link to={"/create"}>Create cargo</Link></li>
+                <nav className="navbar navbar-expand navbar-dark bg-dark">
+                    <Link to={"/"} className="navbar-brand col-1">
+                        <strong>Online Shop</strong>
+                    </Link>
+                    
+                    <div className="offset-sm-9 collapse navbar-collapse">
+                        <ul className="navbar-nav">
+                            <li classname="nav-item active">
+                                <Link className="nav-link" to={"/create"}>Create cargo</Link>
+                            </li>
                         </ul>
                     </div>
                 </nav>
             </header>
+
         )
     }
 }

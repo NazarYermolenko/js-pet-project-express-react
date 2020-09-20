@@ -39,20 +39,22 @@ export default class CreateCargo extends Component {
             <div className="container">
                 {this.state.loading ?
                     <LoadSpinner /> :
-                    <div className="container">
+                    <div className="container mt-3">
                         <form>
-                            <div className="form-group">
-                                <label htmlFor={"title"}>Title</label>
-                                <input onChange={this.setCargoTitle.bind(this)} className="form-control" id="title" placeholder="Title" />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor={"description"}>Description</label>
-                                <input onChange={this.setCargoDescription.bind(this)} className="form-control" id="description" placeholder="Description" />
-                            </div>
-                            <div className="form-group">
-                                <Link to={"/"}>
-                                    <button className="form-control btn btn-primary" onClick={this.handleCargoCreate.bind(this)}>Create</button>
-                                </Link>
+                            <div className="for-group">
+                                <div className="form-group">
+                                    <label htmlFor={"title"}>Title</label>
+                                    <input onChange={this.setCargoTitle.bind(this)} className="form-control" id="title" placeholder="Title" />
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor={"description"}>Description</label>
+                                    <input onChange={this.setCargoDescription.bind(this)} className="form-control" id="description" placeholder="Description" />
+                                </div>
+                                <div className="form-group">
+                                    <Link to={"/"}>
+                                        <button className="form-control btn btn-primary" onClick={this.handleCargoCreate.bind(this)}>Create</button>
+                                    </Link>
+                                </div>
                             </div>
                         </form>
                     </div>

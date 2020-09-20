@@ -42,8 +42,8 @@ class Cargos extends Component {
     render() {
         return (
             <main>
-                <div className="container">
-                    <div className="row">
+                <div className="container mt-5">
+                    <div className="row d-flex">
                         {
                             this.state.loading ?
                                 <LoadSpinner /> :

@@ -23,15 +23,11 @@ export default class CargoInfo extends Component {
                 onMouseLeave={this.onMouseLeave.bind(this)}
             >
                 {(this.props.type === 'title') ?
-                    <h5>Title: </h5> :
-                    <h5>Description: </h5>
+                    <h6>Title: </h6> :
+                    <h6>Description: </h6>
                 }
-                {(this.state.isHover) ?
-                    <p>
-                        {this.props.value} <span className="badge badge-info">(click to change)</span>
-                    </p>
-                    :
-                    <p>{this.props.value}</p>}
+                <p>{this.props.value}</p>
+                {this.state.isHover && <span className="badge badge-info">(click to change)</span>}
             </div>
         )
     }

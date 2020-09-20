@@ -51,8 +51,8 @@ export default class Cargo extends Component {
 
     render() {
         return (
-            <div className="card">
-                <div className="card-content">
+            <div className="card m-3 col-sm-5">
+                <div className="card-body p-6">
                     {(!this.state.isDisplayedTitleInputArea) ?
                         <CargoInfo
                             type={"title"}
@@ -81,7 +81,7 @@ export default class Cargo extends Component {
                             />
                         }
                         <div>
-                            <div className="card-action">
+                            <div className="card-action mt-3">
                                 {(this.state.isDisplayedTitleInputArea || this.state.isDisplayedDescriptionInputArea) ?
                                     <button className="btn btn-secondary" onClick={this.handleUpdateCargo.bind(this)}>Update</button>
                                     : <button className="btn btn-primary" onClick={this.handleDelete.bind(this, this.props.cargo._id)}>Delete</button>
