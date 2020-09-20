@@ -41,9 +41,8 @@ class Cargos extends Component {
 
     render() {
         return (
-            <main>
-                <div className="container mt-5">
-                    <div className="row d-flex">
+                <div className="container">
+                    <div className="row">
                         {
                             this.state.loading ?
                                 <LoadSpinner /> :
@@ -57,7 +56,6 @@ class Cargos extends Component {
                         }
                     </div>
                 </div>
-            </main>
         )
     }
 }

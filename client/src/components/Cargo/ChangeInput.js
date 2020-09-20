@@ -21,11 +21,9 @@ export default class ChangeInput extends Component {
     render() {
         return (
             <div>
-                <div className="row">
-                    <div className="col s8">
-                        <input onChange={this.changeHandler.bind(this)} value={this.state.value}></input>
-                    </div>
-                    <div className="col offset-s2">
+                <div className="row mb-3">
+                    <input onChange={this.changeHandler.bind(this)} value={this.state.value}></input>
+                    <div className="col offset-s1">
                         <button className="btn btn-danger" onClick={this.props.clickCloseHandler}>X</button>
                     </div>
                 </div>
