@@ -7,7 +7,7 @@ export default class NavBar extends React.Component {
         return (
             <header>
                 <nav className="navbar navbar-expand navbar-dark bg-dark">
-                    <Link to={"/"} className="navbar-brand col-1">
+                    <Link to={"/cargos"} className="navbar-brand col-1">
                         <strong>Online Shop</strong>
                     </Link>
                     

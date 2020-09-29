@@ -1,7 +1,7 @@
 import React, { Component } from "react"
-import LoadSpinner from '../../components/LoadSpinner/LoadSpinner'
+import LoadSpinner from '../../../components/LoadSpinner/LoadSpinner'
 import { Link } from 'react-router-dom'
-import { createCargo } from '../../utils/CargoUtils'
+import { createCargo } from '../../../utils/CargoUtils'
 
 export default class CreateCargo extends Component {
     constructor(props) {
