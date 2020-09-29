@@ -10,21 +10,16 @@ export const useRoutes = isAuthenticated => {
         return (
             <Switch>
                 <NavBar />
-                <Route exact path="/cargo">
-                    <Cargos />
-                </Route>
-                <Route path="/create">
-                    <CreateCargo />
-                </Route>
-                <Redirect to="/cargo" />
+                <p>Hello World</p>
+                <Route exact path="/cargos" component={Cargos} />
+                <Route path="/create" component={CreateCargo} />
+                <Redirect to="/cargos" />
             </Switch>
         )
     } else {
         return (
             <Switch>
-                <Route exact path="/auth">
-                    <Auth />
-                </Route>
+                <Route path="/auth" component={Auth} />
                 <Redirect to="/auth" />
             </Switch>
         )

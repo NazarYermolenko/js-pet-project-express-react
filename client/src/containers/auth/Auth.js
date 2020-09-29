@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import LoadSpinner from '../../components/LoadSpinner/LoadSpinner'
 
+import LoadSpinner from '../../components/LoadSpinner/LoadSpinner'
 import { sendLogin, sendRegister } from '../../utils/AuthUtils'
-import { logIn, logOut } from '../../state/actions/auth'
+import { logIn } from '../../state/actions/auth'
 
 class Login extends Component {
     constructor(props) {
@@ -39,11 +39,13 @@ class Login extends Component {
                     this.setState({ errorMessage: "Wrong authentication data" })
                 }
                 if (data.userId && data.token) {
-                    this.props.logIn({userId: data.userId, token: data.token})
+                    this.props.logIn({ userId: data.userId, token: data.token })
                 }
             })
         })
-        this.setState({ loading: false })
+        this.setState({ loading: false });
+        console.log(this.props)
+        this.props.history.push("/cargos")
     }
 
     changeHandler(event) {
@@ -99,4 +101,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps, { logIn, logOut })(Login)
+export default connect(mapStateToProps, { logIn })(Login)
