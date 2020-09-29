@@ -5,20 +5,16 @@ import { BrowserRouter } from 'react-router-dom';
 import { useRoutes } from './routes/routes'
 import './index.css'
 
-import store from './store'
+import store from './state/store'
 
 class App extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      isAuthenticated: false,
-      userId:false
-    }
-    this.routes = useRoutes(this.state.isAuthenticated)
+    this.routes = useRoutes(false)
   }
 
   componentDidMount(){
-    console.log(localStorage.getItem('auth'))
+    console.log(store.getState().authReducer)
   }
 
   render() {
@@ -26,6 +22,7 @@ class App extends Component {
       <div className="App">
         <BrowserRouter>
           <Provider store={store}>
+            {console.log(store.getState().authReducer)}
             {this.routes}
           </Provider>
         </BrowserRouter>

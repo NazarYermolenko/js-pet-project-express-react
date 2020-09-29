@@ -4,7 +4,7 @@ import Cargo from "../../../components/Cargo/Cargo"
 import LoadSpinner from "../../../components/LoadSpinner/LoadSpinner"
 
 import { getCargos, deleteCargo } from "../../../utils/CargoUtils"
-import { cargosReceive, cargoDelete } from '../../../actions/index'
+import { cargosReceive, cargoDelete } from '../../../state/actions/cargos'
 import { connect } from 'react-redux'
 
 class Cargos extends Component {
@@ -16,19 +16,17 @@ class Cargos extends Component {
     }
 
     deleteCargoHandler(id) {
-        const { cargoDelete: cargoDeleteProps } = this.props
         deleteCargo(id).then(() => {
-            cargoDeleteProps(id)
+            this.props.cargoDelete(id)
         })
     }
 
     updateCargos() {
-        const { cargosReceive: cargoReceiveProps } = this.props
         this.setState({
             loading: true
         })
         getCargos().then(data => {
-            cargoReceiveProps(data);
+            this.props.cargoRecieve(data);
             this.setState({
                 loading: false
             })
@@ -62,7 +60,7 @@ class Cargos extends Component {
 
 function mapStateToProps(state) {
     return {
-        cargos: state.cargosStorage.cargos
+        cargos: state.cargosReducer.cargos
     };
 }
 

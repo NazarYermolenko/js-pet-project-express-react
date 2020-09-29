@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import LoadSpinner from '../../components/LoadSpinner/LoadSpinner'
 
 import { sendLogin, sendRegister } from '../../utils/AuthUtils'
+import { logIn, logOut } from '../../state/actions/auth'
 
-export default class Login extends Component {
+class Login extends Component {
     constructor(props) {
         super(props)
         this.changeHandler = this.changeHandler.bind(this)
@@ -36,8 +38,8 @@ export default class Login extends Component {
                 if (response.status !== 200) {
                     this.setState({ errorMessage: "Wrong authentication data" })
                 }
-                if(data.userId && data.token){
-                    localStorage.setItem("auth",JSON.stringify({userId:data.userId, token: data.token}))
+                if (data.userId && data.token) {
+                    this.props.logIn({userId: data.userId, token: data.token})
                 }
             })
         })
@@ -45,14 +47,13 @@ export default class Login extends Component {
     }
 
     changeHandler(event) {
-        this.setState({errorMessage: ""})
+        this.setState({ errorMessage: "" })
         switch (event.target.name) {
             case 'email': this.setState({ email: event.target.value }); break;
             case 'password': this.setState({ password: event.target.value }); break;
             default: console.log("Wrong field"); break;
         }
     }
-
 
     render() {
         return (
@@ -91,3 +92,11 @@ export default class Login extends Component {
         )
     }
 }
+
+function mapStateToProps(state) {
+    return {
+        user_auth: state.authReducer.user_auth
+    };
+}
+
+export default connect(mapStateToProps, { logIn, logOut })(Login)

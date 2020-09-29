@@ -13,7 +13,7 @@ export default class NavBar extends React.Component {
                     
                     <div className="offset-sm-9 collapse navbar-collapse">
                         <ul className="navbar-nav">
-                            <li classname="nav-item active">
+                            <li className="nav-item active">
                                 <Link className="nav-link" to={"/create"}>Create cargo</Link>
                             </li>
                         </ul>

@@ -1,10 +1,10 @@
-import * as actionTypes from '../actions/constants';
+import * as actionTypes from '../actions/cargos/constants';
 
 const initialState = {
     cargos: {},
 }
 
-const cargosStorage = (state = initialState, action) => {
+const cargosReducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.CARGOS_RECEIVED:
             return {
@@ -22,4 +22,4 @@ const cargosStorage = (state = initialState, action) => {
     }
 }
 
-export default cargosStorage
+export default cargosReducer

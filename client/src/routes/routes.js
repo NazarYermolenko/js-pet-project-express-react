@@ -16,7 +16,7 @@ export const useRoutes = isAuthenticated => {
                 <Route path="/create">
                     <CreateCargo />
                 </Route>
-                <Redirect to="/" />
+                <Redirect to="/cargo" />
             </Switch>
         )
     } else {
