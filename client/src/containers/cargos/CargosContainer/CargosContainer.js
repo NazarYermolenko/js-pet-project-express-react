@@ -34,7 +34,6 @@ class Cargos extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props)
         this.updateCargos()
     }
 

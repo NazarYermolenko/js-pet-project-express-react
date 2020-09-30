@@ -1,5 +1,6 @@
 import React from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
+
 import NavBar from "../components/NavBar/NavBar"
 import Auth from "../containers/auth/Auth"
 import Cargos from "../containers/cargos/CargosContainer/CargosContainer"
@@ -16,7 +17,6 @@ export const useRoutes = isAuthenticated => {
                     <Redirect to="/cargos" />
                 </Switch>
             </div>
-
         )
     } else {
         return (
