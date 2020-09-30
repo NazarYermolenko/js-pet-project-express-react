@@ -26,7 +26,7 @@ class Cargos extends Component {
             loading: true
         })
         getCargos().then(data => {
-            this.props.cargoRecieve(data);
+            this.props.cargosReceive(data);
             this.setState({
                 loading: false
             })
@@ -34,26 +34,27 @@ class Cargos extends Component {
     }
 
     componentDidMount() {
+        console.log(this.props)
         this.updateCargos()
     }
 
     render() {
         return (
-                <div className="container">
-                    <div className="row">
-                        {
-                            this.state.loading ?
-                                <LoadSpinner /> :
-                                this.props.cargos.map((cargo) => {
-                                    return <Cargo
-                                        cargo={cargo}
-                                        key={cargo._id}
-                                        onDelete={this.deleteCargoHandler.bind(this)}
-                                        updateHandler={this.updateCargos.bind(this)} />
-                                })
-                        }
-                    </div>
+            <div className="container">
+                <div className="row">
+                    {
+                        this.state.loading ?
+                            <LoadSpinner /> :
+                            this.props.cargos.map((cargo) => {
+                                return <Cargo
+                                    cargo={cargo}
+                                    key={cargo._id}
+                                    onDelete={this.deleteCargoHandler.bind(this)}
+                                    updateHandler={this.updateCargos.bind(this)} />
+                            })
+                    }
                 </div>
+            </div>
         )
     }
 }

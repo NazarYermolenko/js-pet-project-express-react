@@ -44,8 +44,6 @@ class Login extends Component {
             })
         })
         this.setState({ loading: false });
-        console.log(this.props)
-        this.props.history.push("/cargos")
     }
 
     changeHandler(event) {
