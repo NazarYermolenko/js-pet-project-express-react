@@ -5,7 +5,6 @@ const config = require('config')
 const jwt = require('jsonwebtoken')
 
 const { userChecks, userValidationHandler } = require('../lib/validator')
-
 const router = Router()
 
 const secret = config.get('JWT_SECRET')
@@ -34,6 +33,24 @@ router.post("/login", userChecks,
             }
         })
     })
+
+router.post("/me", (req, res, next) => {
+    const token = req.headers.token;
+    if (!token) {
+        next({ status: "401", message: "Unauthorized" })
+    } else {
+        let decryptedUserId;
+        try {
+            decryptedUserId = jwt.verify(token, secret).userId
+        } catch (err) {
+            next({ status: "401", message: err })
+        }
+
+        User.findById(decryptedUserId).then((user) => {
+            next({ status: "200", message: `${user.email} verified` })
+        })
+    }
+})
 
 router.post("/register", userChecks,
     (req, res, next) => {

@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const { errorHandler } = require('./middleware/general_middleware');
+const { errorHandler, authorization } = require('./middleware/general_middleware');
 const config = require('config')
 
 const app = express()
@@ -27,7 +27,11 @@ async function start() {
 app.use(express.json())
 app.use(bodyParser.json())
 
+
+app.use(authorization)
+
 app.use("/api/auth", require(`./routes/auth`))
+
 app.use("/api/cargos/", require('./routes/cargos'));
 
 app.use(errorHandler)

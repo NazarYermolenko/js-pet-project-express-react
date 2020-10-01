@@ -1,3 +1,8 @@
+const jwt = require('jsonwebtoken')
+const config = require('config')
+
+const secret = config.get('JWT_SECRET')
+
 function errorHandler(err, req, res, next) {
     res.headers = { "content-type": "application/json" }
     if (err) {
@@ -10,6 +15,23 @@ function errorHandler(err, req, res, next) {
     }
 }
 
+function authorization(req, res, next) {
+    const token = req.headers.token
+    const auth_url = req.originalUrl.includes("auth")
+    if (auth_url) {
+        next()
+    } else {
+        if (token) {
+            console.log(jwt.verify(token, secret))
+            next()
+        } else {
+            next({ status: "401", message: "Unauthorized" })
+        }
+    }
+}
+
+
 module.exports = {
-    errorHandler
+    errorHandler,
+    authorization
 }
