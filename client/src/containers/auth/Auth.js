@@ -40,7 +40,7 @@ class Login extends Component {
                 }
                 if (loginData.userId && loginData.token) {
                     checkMe(loginData.token).then((checkMeData) => {
-                        if (checkMeData.status == 200) {
+                        if (checkMeData.status === 200) {
                             this.props.logIn({ userId: loginData.userId, token: loginData.token })
                             localStorage.setItem('authenticated', JSON.stringify({ authenticated: true, user: { userId: loginData.userId, token: loginData.token } }))
                         } else {
