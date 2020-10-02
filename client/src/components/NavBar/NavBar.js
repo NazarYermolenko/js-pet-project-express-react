@@ -12,9 +12,7 @@ class NavBar extends React.Component {
     }
 
     logoutHandler() {
-        let old_local = JSON.parse(localStorage.getItem("authenticated"))
-        old_local.authenticated = false
-        localStorage.setItem("authenticated", JSON.stringify(old_local))
+        localStorage.clear()
         this.props.logOut(this.props.user_auth.user);
     }
 

@@ -12,13 +12,11 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.getAuth = this.getAuth.bind(this)
-    this.state = {
-      local_storage_data: JSON.parse(localStorage.getItem('authenticated'))
-    };
   }
   getAuth() {
-    if (this.state.local_storage_data.authenticated) {
-      this.props.logIn(this.state.local_storage_data.user)
+    const authenticated = JSON.parse(localStorage.getItem('authenticated'))
+    if (authenticated) {
+      this.props.logIn(authenticated.user)
     }
   }
 
