@@ -2,8 +2,9 @@ import React, { Component } from "react"
 import CargoInfo from "./CargoInfo"
 import ChangeInput from "./ChangeInput"
 import { updateCargo } from '../../utils/CargoUtils'
+import { connect } from "react-redux"
 
-export default class Cargo extends Component {
+class Cargo extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -41,7 +42,7 @@ export default class Cargo extends Component {
     }
 
     handleUpdateCargo() {
-        updateCargo(this.state.changedCargo).then(() => this.props.updateHandler())
+        updateCargo(this.state.changedCargo, this.props.token).then(() => this.props.updateHandler())
         this.setState({
             isDisplayedTitleInputArea: false,
             isDisplayedDescriptionInputArea: false
@@ -94,3 +95,11 @@ export default class Cargo extends Component {
         )
     }
 }
+
+function mapStateToProps(state) {
+    return {
+        token: state.authReducer.user_auth.user.token
+    }
+}
+
+export default connect(mapStateToProps)(Cargo)
