@@ -2,8 +2,10 @@ import React, { Component } from "react"
 import LoadSpinner from '../../../components/LoadSpinner/LoadSpinner'
 import { Link } from 'react-router-dom'
 import { createCargo } from '../../../utils/CargoUtils'
+import { connect } from 'react-redux'
 
-export default class CreateCargo extends Component {
+
+class CreateCargo extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -25,7 +27,7 @@ export default class CreateCargo extends Component {
         createCargo({
             title: this.state.title,
             description: this.state.description
-        })
+        }, this.props.token)
     }
 
     componentDidMount() {
@@ -63,3 +65,11 @@ export default class CreateCargo extends Component {
         )
     }
 }
+
+function mapStateToProps(state) {
+    return {
+        token: state.authReducer.user_auth.user.token
+    }
+}
+
+export default connect(mapStateToProps)(CreateCargo);

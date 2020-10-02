@@ -8,12 +8,13 @@ import { logOut } from '../../state/actions/auth'
 class NavBar extends React.Component {
     constructor(props) {
         super(props)
-        this.state = { redirect: false }
         this.logoutHandler = this.logoutHandler.bind(this)
     }
 
     logoutHandler() {
-        this.setState({ redirect: true })
+        let old_local = JSON.parse(localStorage.getItem("authenticated"))
+        old_local.authenticated = false
+        localStorage.setItem("authenticated", JSON.stringify(old_local))
         this.props.logOut(this.props.user_auth.user);
     }
 

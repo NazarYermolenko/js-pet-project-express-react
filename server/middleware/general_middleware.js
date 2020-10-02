@@ -22,10 +22,10 @@ function authorization(req, res, next) {
         next()
     } else {
         if (token) {
-            console.log(jwt.verify(token, secret))
+            jwt.verify(token, secret)
             next()
         } else {
-            next({ status: "401", message: "Unauthorized" })
+            next({ status: "401", message: "Token doesn't presented" })
         }
     }
 }

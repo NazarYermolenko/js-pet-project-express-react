@@ -16,7 +16,7 @@ class Cargos extends Component {
     }
 
     deleteCargoHandler(id) {
-        deleteCargo(id).then(() => {
+        deleteCargo(id, this.props.token).then(() => {
             this.props.cargoDelete(id)
         })
     }
@@ -25,7 +25,7 @@ class Cargos extends Component {
         this.setState({
             loading: true
         })
-        getCargos().then(data => {
+        getCargos(this.props.token).then(data => {
             this.props.cargosReceive(data);
             this.setState({
                 loading: false
@@ -60,7 +60,8 @@ class Cargos extends Component {
 
 function mapStateToProps(state) {
     return {
-        cargos: state.cargosReducer.cargos
+        cargos: state.cargosReducer.cargos, 
+        token: state.authReducer.user_auth.user.token
     };
 }
 

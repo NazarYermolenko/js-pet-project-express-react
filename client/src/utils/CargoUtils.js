@@ -5,47 +5,47 @@ const headers = {
 
 const endpoint = "/cargos"
 
-function getCargos() {
+function getCargos(token) {
     return fetch(endpoint, {
         method: "GET",
-        headers
+        headers: { ...headers, token }
     }).then((response) => {
         return response.json()
     })
 }
 
-function getCargo(id) {
+function getCargo(id, token) {
     return fetch(`${endpoint}/${id}`, {
         method: "GET",
-        headers
+        headers: { ...headers, token }
     }).then((response) => {
         return response.json()
     })
 }
 
-function deleteCargo(id) {
+function deleteCargo(id, token) {
     return fetch(`${endpoint}/${id}`, {
         method: "DELETE",
-        headers
+        headers: { ...headers, token }
     }).then((response) => {
         return response.json()
     })
 }
 
-function createCargo(cargo) {
+function createCargo(cargo, token) {
     return fetch(endpoint, {
         method: "POST",
-        headers,
+        headers: { ...headers, token },
         body: JSON.stringify(cargo)
     }).then((response) => {
         return response.json()
     })
 }
 
-function updateCargo(cargo) {
+function updateCargo(cargo, token) {
     return fetch(`${endpoint}/${cargo._id}`, {
         method: "PUT",
-        headers,
+        headers: { ...headers, token },
         body: JSON.stringify(cargo)
     }).then((response) => {
         return response.json()
