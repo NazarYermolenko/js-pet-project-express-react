@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import LoadSpinner from '../LoadSpinner/LoadSpinner'
-import { sendLogin, sendRegister, checkMe } from '../../utils/AuthUtils'
+import { sendLogin, sendRegister, checkLogin } from '../../utils/AuthUtils'
 import { logIn } from '../../state/actions/auth'
 
 class Login extends Component {
@@ -39,8 +39,8 @@ class Login extends Component {
                     this.setState({ errorMessage: "Wrong authentication data" })
                 }
                 if (loginData.userId && loginData.token) {
-                    checkMe(loginData.token).then((checkMeData) => {
-                        if (checkMeData.status === 200) {
+                    checkLogin(loginData.token).then((checkLogin) => {
+                        if (checkLogin.status === 200) {
                             this.props.logIn({ userId: loginData.userId, token: loginData.token })
                             localStorage.setItem('authenticated', JSON.stringify({ authenticated: true, user: { userId: loginData.userId, token: loginData.token } }))
                         } else {

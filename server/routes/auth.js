@@ -10,6 +10,14 @@ const router = Router()
 const secret = config.get('JWT_SECRET')
 const saltRounds = 10
 
+
+router.get("/login", (req, res, next) => {
+    const token = req.headers.token;
+    if (token) {
+        next({ status: "200", message: "Verified" });
+    }
+})
+
 router.post("/login", userChecks,
     (req, res, next) => {
         userValidationHandler(req, next)
@@ -17,15 +25,19 @@ router.post("/login", userChecks,
 
         User.findOne({ email }).then((user) => {
             if (user) {
-                bcrypt.compare(password, user.password).then((successfull) => {
-                    if (successfull) {
-                        const token = jwt.sign(
-                            { userId: user._id },
-                            secret,
-                            { expiresIn: "1h" })
-                        res.status(200).json({ userId: user._id, token })
-                    } else {
-                        next({ status: '401', message: "Wrong email or password" })
+                User.updateOne({ email }, { lastActive: Date.now() }).then((updated) => {
+                    if (updated.ok) {
+                        bcrypt.compare(password, user.password).then((successfull) => {
+                            if (successfull) {
+                                const token = jwt.sign(
+                                    { userId: user._id },
+                                    secret,
+                                    { expiresIn: "1h" })
+                                res.status(200).json({ userId: user._id, token, lastActive: user.lastActive })
+                            } else {
+                                next({ status: '401', message: "Wrong email or password" })
+                            }
+                        })
                     }
                 })
             } else {
@@ -33,24 +45,6 @@ router.post("/login", userChecks,
             }
         })
     })
-
-router.post("/me", (req, res, next) => {
-    const token = req.headers.token;
-    if (!token) {
-        next({ status: "401", message: "Unauthorized" })
-    } else {
-        let decryptedUserId;
-        try {
-            decryptedUserId = jwt.verify(token, secret).userId
-        } catch (err) {
-            next({ status: "401", message: err })
-        }
-
-        User.findById(decryptedUserId).then((user) => {
-            next({ status: "200", message: `${user.email} verified` })
-        })
-    }
-})
 
 router.post("/register", userChecks,
     (req, res, next) => {
@@ -62,12 +56,17 @@ router.post("/register", userChecks,
                 next({ status: "400", message: `Registration error` })
             } else {
                 bcrypt.hash(password, saltRounds).then((hashedPassword) => {
-                    User.create({ email, password: hashedPassword }).then((user) => {
+                    User.create({
+                        email,
+                        password: hashedPassword,
+                        created: Date.now()
+                    }).then((user) => {
                         res.status(200).json(user)
                     })
                 })
             }
         })
     })
+
 
 module.exports = router
