@@ -4,7 +4,7 @@ const headers = {
 }
 
 function sendLogin(email, password) {
-    return fetch("/auth/login", {
+    return fetch("/api/auth/login", {
         headers,
         method: "POST",
         body: JSON.stringify({ email, password })
@@ -19,7 +19,7 @@ function sendLogin(email, password) {
 
 
 function checkMe(token) {
-    return fetch("/auth/me", {
+    return fetch("/api/auth/me", {
         headers: { ...headers, token },
         method: "POST"
     }).then((response) => {
@@ -32,7 +32,7 @@ function checkMe(token) {
 }
 
 function sendRegister(email, password) {
-    return fetch("/auth/register", {
+    return fetch("/api/auth/register", {
         headers,
         method: "POST",
         body: JSON.stringify({ email, password })

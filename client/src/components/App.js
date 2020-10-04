@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
 
-import { useRoutes } from './routes/routes'
-import { logIn } from './state/actions/auth'
+import { useRoutes } from '../routes/routes'
 
-import './index.css'
+import { logIn } from '../state/actions/auth'
+
+
+import '../styles/index.css'
 
 
 class App extends Component {

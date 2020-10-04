@@ -3,7 +3,7 @@ const headers = {
     'Accept': 'application/json'
 }
 
-const endpoint = "/cargos"
+const endpoint = "/api/cargos"
 
 function getCargos(token) {
     return fetch(endpoint, {
