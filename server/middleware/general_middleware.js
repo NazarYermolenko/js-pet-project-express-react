@@ -22,7 +22,11 @@ function authorization(req, res, next) {
         next()
     } else {
         if (token) {
-            jwt.verify(token, secret)
+            jwt.verify(token, secret, (err)=> {
+                if(err){
+                    next({status:"401", message: "Token issue"})
+                }
+            })
             next()
         } else {
             next({ status: "401", message: "Token doesn't presented" })

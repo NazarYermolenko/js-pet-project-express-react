@@ -1,10 +1,10 @@
 import React, { Component } from "react"
 
-import Cargo from "../../../components/Cargo/Cargo"
-import LoadSpinner from "../../../components/LoadSpinner/LoadSpinner"
+import Cargo from "./Cargo/Cargo"
+import LoadSpinner from "../LoadSpinner/LoadSpinner"
 
-import { getCargos, deleteCargo } from "../../../utils/CargoUtils"
-import { cargosReceive, cargoDelete } from '../../../state/actions/cargos'
+import { getCargos, deleteCargo } from "../../utils/CargoUtils"
+import { cargosReceive, cargoDelete } from '../../state/actions/cargos'
 import { connect } from 'react-redux'
 
 class Cargos extends Component {

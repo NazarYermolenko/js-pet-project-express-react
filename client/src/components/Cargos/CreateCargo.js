@@ -1,8 +1,9 @@
 import React, { Component } from "react"
-import LoadSpinner from '../../../components/LoadSpinner/LoadSpinner'
 import { Link } from 'react-router-dom'
-import { createCargo } from '../../../utils/CargoUtils'
 import { connect } from 'react-redux'
+
+import LoadSpinner from '../LoadSpinner/LoadSpinner'
+import { createCargo } from '../../utils/CargoUtils'
 
 
 class CreateCargo extends Component {

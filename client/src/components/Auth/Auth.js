@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import LoadSpinner from '../../components/LoadSpinner/LoadSpinner'
+import LoadSpinner from '../LoadSpinner/LoadSpinner'
 import { sendLogin, sendRegister, checkMe } from '../../utils/AuthUtils'
 import { logIn } from '../../state/actions/auth'
 

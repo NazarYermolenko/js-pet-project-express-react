@@ -1,8 +1,10 @@
 import React, { Component } from "react"
 import CargoInfo from "./CargoInfo"
 import ChangeInput from "./ChangeInput"
-import { updateCargo } from '../../utils/CargoUtils'
 import { connect } from "react-redux"
+
+import { updateCargo } from '../../../utils/CargoUtils'
+
 
 class Cargo extends Component {
     constructor(props) {
