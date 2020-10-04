@@ -9,6 +9,7 @@ module.exports = {
         filename: "index_bundle.js"
     },
     devServer: {
+        historyApiFallback: true,
         proxy: [{
             context: ["/api"],
             target: "http://localhost:5000"
