@@ -7,7 +7,9 @@ import { useRoutes } from '../routes/routes'
 import { logIn } from '../state/actions/auth'
 
 
-import '../styles/index.css'
+import '../styles/css/normalize.css'
+import '../styles/css/index.css'
+
 
 
 class App extends Component {
