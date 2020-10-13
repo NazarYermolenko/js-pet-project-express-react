@@ -64,37 +64,33 @@ class Login extends Component {
 
     render() {
         return (
-            <div className="d-flex justify-content-center">
-                <div className="m-5">
-                    <div className="card p-3">
-                        <div className="d-flex justify-content-center">
-                            <h3 className="align-center">Welcome!!!</h3>
-                        </div>
-                        <form className='d-flex flex-column'>
-                            <div className="my-2">
-                                <label htmlFor={'email'}>E-mail:</label>
-                                <input type='email' onChange={this.changeHandler} value={this.state.value} name="email" className='form-control' placeholder='Email' id='email'></input>
-                            </div>
-                            <div className="my-2">
-                                <label htmlFor='password'>Password:</label>
-                                <input type='password' onChange={this.changeHandler} value={this.state.value} name="password" className="form-control" placeholder='Password' id='password'></input>
-                            </div>
-
-                            {(this.state.loading) ?
-                                <LoadSpinner /> :
-                                <div className="d-flex flex-column my-2">
-                                    <button type='button' className='btn btn-primary m-1' onClick={this.clickLogin}>Login</button>
-                                    <button type='button' className='btn btn-success m-1' onClick={this.clickRegister}>Register</button>
-                                </div>
-                            }
-                            {
-                                this.state.errorMessage && <div className="alert alert-danger">
-                                    <p>{this.state.errorMessage}</p>
-                                </div>
-                            }
-                        </form>
-                    </div>
+            <div className="auth-container">
+                <div className="header">
+                    <h3>Welcome!!!</h3>
                 </div>
+                <form className="form">
+                    <div>
+                        <label htmlFor={'email'}>E-mail:</label>
+                        <input type='email' onChange={this.changeHandler} value={this.state.value} name="email" placeholder='Email' id='email' />
+                    </div>
+                    <div>
+                        <label htmlFor='password'>Password:</label>
+                        <input type='password' onChange={this.changeHandler} value={this.state.value} name="password" placeholder='Password' id='password' />
+                    </div>
+
+                    {(this.state.loading) ?
+                        <LoadSpinner /> :
+                        <div>
+                            <button type='button' className="btn btn-green" onClick={this.clickLogin}>Login</button>
+                            <button type='button' className="btn btn-yellow" onClick={this.clickRegister}>Register</button>
+                        </div>
+                    }
+                    {
+                        this.state.errorMessage && <div>
+                            <p>{this.state.errorMessage}</p>
+                        </div>
+                    }
+                </form>
             </div>
         )
     }

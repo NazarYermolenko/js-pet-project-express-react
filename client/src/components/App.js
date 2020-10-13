@@ -8,7 +8,7 @@ import { logIn } from '../state/actions/auth'
 
 
 import '../styles/css/normalize.css'
-import '../styles/css/index.css'
+import '../styles/scss/index.scss'
 
 
 
