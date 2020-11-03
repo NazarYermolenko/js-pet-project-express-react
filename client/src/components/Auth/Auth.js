@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import LoadSpinner from '../LoadSpinner/LoadSpinner'
-import { sendLogin, sendRegister, checkMe } from '../../utils/AuthUtils'
+import { sendLogin, sendRegister, checkLogin } from '../../utils/AuthUtils'
 import { logIn } from '../../state/actions/auth'
 
 class Login extends Component {
@@ -39,8 +39,8 @@ class Login extends Component {
                     this.setState({ errorMessage: "Wrong authentication data" })
                 }
                 if (loginData.userId && loginData.token) {
-                    checkMe(loginData.token).then((checkMeData) => {
-                        if (checkMeData.status === 200) {
+                    checkLogin(loginData.token).then((checkLogin) => {
+                        if (checkLogin.status === 200) {
                             this.props.logIn({ userId: loginData.userId, token: loginData.token })
                             localStorage.setItem('authenticated', JSON.stringify({ authenticated: true, user: { userId: loginData.userId, token: loginData.token } }))
                         } else {
@@ -64,37 +64,45 @@ class Login extends Component {
 
     render() {
         return (
-            <div className="d-flex justify-content-center">
-                <div className="m-5">
-                    <div className="card p-3">
-                        <div className="d-flex justify-content-center">
-                            <h3 className="align-center">Welcome!!!</h3>
-                        </div>
-                        <form className='d-flex flex-column'>
-                            <div className="my-2">
-                                <label htmlFor={'email'}>E-mail:</label>
-                                <input type='email' onChange={this.changeHandler} value={this.state.value} name="email" className='form-control' placeholder='Email' id='email'></input>
-                            </div>
-                            <div className="my-2">
-                                <label htmlFor='password'>Password:</label>
-                                <input type='password' onChange={this.changeHandler} value={this.state.value} name="password" className="form-control" placeholder='Password' id='password'></input>
-                            </div>
-
-                            {(this.state.loading) ?
-                                <LoadSpinner /> :
-                                <div className="d-flex flex-column my-2">
-                                    <button type='button' className='btn btn-primary m-1' onClick={this.clickLogin}>Login</button>
-                                    <button type='button' className='btn btn-success m-1' onClick={this.clickRegister}>Register</button>
-                                </div>
-                            }
-                            {
-                                this.state.errorMessage && <div className="alert alert-danger">
-                                    <p>{this.state.errorMessage}</p>
-                                </div>
-                            }
-                        </form>
-                    </div>
+            <div className="auth-container">
+                <div className="header">
+                    <h3>Welcome!!!</h3>
                 </div>
+                <form className="form">
+                    <div className="input-area">
+                        <div className="label">
+                            <label htmlFor={'email'}>E-mail:</label>
+                        </div>
+                        <div className='input'>
+                            <input type='email' onChange={this.changeHandler} value={this.state.value} name="email" placeholder='Email' id='email' />
+                        </div>
+                    </div>
+                    <div className="input-area">
+                        <div className="label">
+                            <label htmlFor='password'>Password:</label>
+                        </div>
+                        <div className='input'>
+                            <input type='password' onChange={this.changeHandler} value={this.state.value} name="password" placeholder='Password' id='password' />
+                        </div>
+                    </div>
+
+                    {(this.state.loading) ?
+                        <LoadSpinner /> :
+                        <div className="buttons">
+                            <div>
+                                <button type='button' className="btn btn-green" onClick={this.clickLogin}>Login</button>
+                            </div>
+                            <div>
+                                <button type='button' className="btn btn-yellow" onClick={this.clickRegister}>Register</button>
+                            </div>
+                        </div>
+                    }
+                    {
+                        this.state.errorMessage && <div>
+                            <p>{this.state.errorMessage}</p>
+                        </div>
+                    }
+                </form>
             </div>
         )
     }

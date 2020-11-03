@@ -18,10 +18,10 @@ function sendLogin(email, password) {
 }
 
 
-function checkMe(token) {
-    return fetch("/api/auth/me", {
+function checkLogin(token) {
+    return fetch("/api/auth/login", {
         headers: { ...headers, token },
-        method: "POST"
+        method: "GET"
     }).then((response) => {
         const json = response.json()
         return new Promise((resolve => {
@@ -47,6 +47,6 @@ function sendRegister(email, password) {
 
 module.exports = {
     sendLogin,
-    checkMe,
+    checkLogin,
     sendRegister
 }
