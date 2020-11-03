@@ -69,20 +69,32 @@ class Login extends Component {
                     <h3>Welcome!!!</h3>
                 </div>
                 <form className="form">
-                    <div>
-                        <label htmlFor={'email'}>E-mail:</label>
-                        <input type='email' onChange={this.changeHandler} value={this.state.value} name="email" placeholder='Email' id='email' />
+                    <div className="input-area">
+                        <div className="label">
+                            <label htmlFor={'email'}>E-mail:</label>
+                        </div>
+                        <div className='input'>
+                            <input type='email' onChange={this.changeHandler} value={this.state.value} name="email" placeholder='Email' id='email' />
+                        </div>
                     </div>
-                    <div>
-                        <label htmlFor='password'>Password:</label>
-                        <input type='password' onChange={this.changeHandler} value={this.state.value} name="password" placeholder='Password' id='password' />
+                    <div className="input-area">
+                        <div className="label">
+                            <label htmlFor='password'>Password:</label>
+                        </div>
+                        <div className='input'>
+                            <input type='password' onChange={this.changeHandler} value={this.state.value} name="password" placeholder='Password' id='password' />
+                        </div>
                     </div>
 
                     {(this.state.loading) ?
                         <LoadSpinner /> :
-                        <div>
-                            <button type='button' className="btn btn-green" onClick={this.clickLogin}>Login</button>
-                            <button type='button' className="btn btn-yellow" onClick={this.clickRegister}>Register</button>
+                        <div className="buttons">
+                            <div>
+                                <button type='button' className="btn btn-green" onClick={this.clickLogin}>Login</button>
+                            </div>
+                            <div>
+                                <button type='button' className="btn btn-yellow" onClick={this.clickRegister}>Register</button>
+                            </div>
                         </div>
                     }
                     {
