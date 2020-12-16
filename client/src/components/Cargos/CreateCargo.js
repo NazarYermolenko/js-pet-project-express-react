@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import LoadSpinner from '../LoadSpinner/LoadSpinner'
+import { LoadSpinner } from '../BaseComponents'
 import { createCargo } from '../../utils/CargoUtils'
 
 

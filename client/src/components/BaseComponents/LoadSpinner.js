@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-export default class LoadSpinner extends React.Component {
+export default class LoadSpinner extends Component {
 
     render() {
         return (

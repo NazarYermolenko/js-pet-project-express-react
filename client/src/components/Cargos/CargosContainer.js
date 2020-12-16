@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 
 import Cargo from "./Cargo/Cargo"
-import LoadSpinner from "../LoadSpinner/LoadSpinner"
+import { LoadSpinner } from "../BaseComponents"
 
 import { getCargos, deleteCargo } from "../../utils/CargoUtils"
 import { cargosReceive, cargoDelete } from '../../state/actions/cargos'
@@ -60,7 +60,7 @@ class Cargos extends Component {
 
 function mapStateToProps(state) {
     return {
-        cargos: state.cargosReducer.cargos, 
+        cargos: state.cargosReducer.cargos,
         token: state.authReducer.user_auth.user.token
     };
 }

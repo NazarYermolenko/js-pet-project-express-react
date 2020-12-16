@@ -1,14 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import LoadSpinner from '../LoadSpinner/LoadSpinner'
+
+import { Button, InputField, Notification, LoadSpinner, PageTitle } from "../BaseComponents"
 import { sendLogin, sendRegister, checkLogin } from '../../utils/AuthUtils'
 import { logIn } from '../../state/actions/auth'
 
 class Login extends Component {
     constructor(props) {
         super(props)
-        this.changeHandler = this.changeHandler.bind(this)
+        this.emailChangeHandler = this.emailChangeHandler.bind(this)
+        this.passwordChangeHandler = this.passwordChangeHandler.bind(this)
         this.clickRegister = this.clickRegister.bind(this)
         this.clickLogin = this.clickLogin.bind(this)
         this.state = {
@@ -53,54 +55,53 @@ class Login extends Component {
         this.setState({ loading: false });
     }
 
-    changeHandler(event) {
-        this.setState({ errorMessage: "" })
-        switch (event.target.name) {
-            case 'email': this.setState({ email: event.target.value }); break;
-            case 'password': this.setState({ password: event.target.value }); break;
-            default: console.log("Wrong field"); break;
-        }
+    emailChangeHandler(event) {
+        this.setState({
+            email: event.target.value,
+            errorMessage: ""
+        })
+    }
+
+    passwordChangeHandler(event) {
+        this.setState({
+            password: event.target.value,
+            errorMessage: ""
+        })
     }
 
     render() {
         return (
             <div className="auth-container">
-                <div className="header">
-                    <h3>Welcome!!!</h3>
-                </div>
+                <PageTitle text={"Authentication Page"} />
+                
                 <form className="form">
-                    <div className="input-area">
-                        <div className="label">
-                            <label htmlFor={'email'}>E-mail:</label>
-                        </div>
-                        <div className='input'>
-                            <input type='email' onChange={this.changeHandler} value={this.state.value} name="email" placeholder='Email' id='email' />
-                        </div>
-                    </div>
-                    <div className="input-area">
-                        <div className="label">
-                            <label htmlFor='password'>Password:</label>
-                        </div>
-                        <div className='input'>
-                            <input type='password' onChange={this.changeHandler} value={this.state.value} name="password" placeholder='Password' id='password' />
-                        </div>
-                    </div>
+                    <InputField type={"email"}
+                        onChange={this.emailChangeHandler}
+                        value={this.state.value}
+                        name={"email"}
+                        placeholder="E-mail"
+                        id="email"
+                        label={"Email:"}
+                    />
+
+                    <InputField type={"password"}
+                        onChange={this.passwordChangeHandler}
+                        value={this.state.value}
+                        name={"password"}
+                        placeholder="Password"
+                        id="password"
+                        label={"Password:"}
+                    />
 
                     {(this.state.loading) ?
                         <LoadSpinner /> :
                         <div className="buttons">
-                            <div>
-                                <button type='button' className="btn btn-green" onClick={this.clickLogin}>Login</button>
-                            </div>
-                            <div>
-                                <button type='button' className="btn btn-yellow" onClick={this.clickRegister}>Register</button>
-                            </div>
+                            <Button text={"Log In"} onClick={this.clickLogin} />
+                            <Button text={"Register"} onClick={this.clickRegister} />
                         </div>
                     }
                     {
-                        this.state.errorMessage && <div>
-                            <p>{this.state.errorMessage}</p>
-                        </div>
+                        this.state.errorMessage && <Notification text={this.state.errorMessage} />
                     }
                 </form>
             </div>
