@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
-
 import { useRoutes } from '../routes/routes'
-
 import { logIn } from '../state/actions/auth'
-
 
 import '../styles/css/normalize.css'
 import '../styles/scss/index.scss'
-
+import '../styles/css/reset.css'
 
 
 class App extends Component {

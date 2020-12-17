@@ -1,11 +1,11 @@
-import React from "react"
+import React, { Component } from "react"
 import { Link } from "react-router-dom"
 import { connect } from 'react-redux'
 
-import { logOut } from '../../state/actions/auth'
+import { logOut } from '../../../state/actions/auth'
 
 
-class NavBar extends React.Component {
+class NavBar extends Component {
     constructor(props) {
         super(props)
         this.logoutHandler = this.logoutHandler.bind(this)

@@ -1,0 +1,28 @@
+.input-wrap {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    right:0.8rem;
+
+    .input {
+        width: 100%;
+        border:0;
+        border-bottom: 2px solid grey;
+        outline: 0;
+        font-size: 1rem;
+        color: white;
+        padding: 0.7rem;
+        background: transparent;
+        transition: border-color 0.2s;
+    
+        &::placeholder {
+            color: transparent;
+        }
+
+        &:placeholder-shown ~ .form__label {
+            font-size: 1.3rem;
+            cursor: text;
+            top: 20px;
+          }
+    }
+}

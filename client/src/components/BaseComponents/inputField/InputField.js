@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 
+import "./inputField.scss"
 export default class Input extends Component {
+
     render() {
         return <div className="input-wrap">
-            <label htmlFor={this.props.id}>{this.props.label}</label>
-            <input className={this.props.className}
+            <label className="label" htmlFor={this.props.id}>{this.props.label}</label>
+            <input className="input"
                 type={this.props.type}
                 onChange={this.props.onChange}
                 value={this.props.value}

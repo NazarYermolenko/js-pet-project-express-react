@@ -1,0 +1,32 @@
+$background-color: rgba(37, 37,37,255);
+$text-color: darkgrey;
+
+.notification-wrap {
+    position: absolute;
+    display: block;
+    right: 2rem;
+    top:1rem;
+    border:1px solid grey;
+    border-radius: 0.5rem;
+
+    animation-name: appear;
+    animation-duration: 0.3s;
+    animation-timing-function: ease-in;
+
+}
+
+@keyframes appear {
+    from{
+        transform: scale(0);
+    }
+
+    to {
+        transform: scale(1);
+    }
+
+}
+
+
+.notification {
+    margin: 1rem;
+}

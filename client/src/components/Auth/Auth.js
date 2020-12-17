@@ -6,7 +6,7 @@ import { Button, InputField, Notification, LoadSpinner, PageTitle } from "../Bas
 import { sendLogin, sendRegister, checkLogin } from '../../utils/AuthUtils'
 import { logIn } from '../../state/actions/auth'
 
-class Login extends Component {
+class Auth extends Component {
     constructor(props) {
         super(props)
         this.emailChangeHandler = this.emailChangeHandler.bind(this)
@@ -71,17 +71,16 @@ class Login extends Component {
 
     render() {
         return (
-            <div className="auth-container">
+            <div className="container">
                 <PageTitle text={"Authentication Page"} />
-                
-                <form className="form">
+                <div className="middle-containe top-offset-15">
                     <InputField type={"email"}
                         onChange={this.emailChangeHandler}
                         value={this.state.value}
                         name={"email"}
                         placeholder="E-mail"
                         id="email"
-                        label={"Email:"}
+                        label={"E-mail:"}
                     />
 
                     <InputField type={"password"}
@@ -92,18 +91,18 @@ class Login extends Component {
                         id="password"
                         label={"Password:"}
                     />
+                </div>
 
-                    {(this.state.loading) ?
-                        <LoadSpinner /> :
-                        <div className="buttons">
-                            <Button text={"Log In"} onClick={this.clickLogin} />
-                            <Button text={"Register"} onClick={this.clickRegister} />
-                        </div>
-                    }
-                    {
-                        this.state.errorMessage && <Notification text={this.state.errorMessage} />
-                    }
-                </form>
+                {(this.state.loading) ?
+                    <LoadSpinner /> :
+                    <div className="row middle-container top-offset-15">
+                        <Button text={"Log In"} onClick={this.clickLogin} />
+                        <Button text={"Register"} onClick={this.clickRegister} />
+                    </div>
+                }
+                {
+                    this.state.errorMessage && <Notification text={this.state.errorMessage} />
+                }
             </div>
         )
     }
@@ -115,4 +114,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps, { logIn })(Login)
+export default connect(mapStateToProps, { logIn })(Auth)
