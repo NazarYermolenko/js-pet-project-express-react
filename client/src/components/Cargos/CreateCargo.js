@@ -2,13 +2,17 @@ import React, { Component } from "react"
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import { LoadSpinner } from '../BaseComponents'
+import { Button, InputField, LoadSpinner } from '../BaseComponents'
 import { createCargo } from '../../utils/CargoUtils'
 
 
 class CreateCargo extends Component {
     constructor(props) {
         super(props)
+        this.setCargoTitle = this.setCargoTitle.bind(this)
+        this.setCargoDescription = this.setCargoDescription.bind(this)
+        this.handleCargoCreate = this.handleCargoCreate.bind(this)
+
         this.state = {
             loading: true,
             title: "",
@@ -39,27 +43,29 @@ class CreateCargo extends Component {
 
     render() {
         return (
-            <div className="container">
+            <div className="container center offset_top_1_5">
                 {this.state.loading ?
                     <LoadSpinner /> :
-                    <div className="container mt-3">
-                        <form>
-                            <div className="for-group">
-                                <div className="form-group">
-                                    <label htmlFor={"title"}>Title</label>
-                                    <input onChange={this.setCargoTitle.bind(this)} className="form-control" id="title" placeholder="Title" />
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor={"description"}>Description</label>
-                                    <input onChange={this.setCargoDescription.bind(this)} className="form-control" id="description" placeholder="Description" />
-                                </div>
-                                <div className="form-group">
-                                    <Link to={"/"}>
-                                        <button className="form-control btn btn-primary" onClick={this.handleCargoCreate.bind(this)}>Create</button>
-                                    </Link>
+                    <div className="column">
+                        <InputField
+                            type={"text"}
+                            placeholder={"Title"}
+                            onChange={this.setCargoTitle}
+                            label={"Title:"} />
+                        <InputField
+                            type={"text"}
+                            placeholder={"Description"}
+                            onChange={this.setCargoDescription}
+                            label={"Description"}
+                        />
+                        <Link to={"/"}>
+                            <div className="container row justify_content offset_top_1_5 offset_left_1_5">
+                                <div>
+                                    <Button text={"Create Cargo"} onClick={this.handleCargoCreate} />
+                                    <Button className="red" text={"Cancel"} />
                                 </div>
                             </div>
-                        </form>
+                        </Link>
                     </div>
                 }
             </div>

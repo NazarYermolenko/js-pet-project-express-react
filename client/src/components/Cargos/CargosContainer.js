@@ -7,21 +7,26 @@ import { getCargos, deleteCargo } from "../../utils/CargoUtils"
 import { cargosReceive, cargoDelete } from '../../state/actions/cargos'
 import { connect } from 'react-redux'
 
-class Cargos extends Component {
+class CargoContainer extends Component {
     constructor(props) {
         super(props)
+        this.handleCargoDelete = this.handleCargoDelete.bind(this)
+        this.handleCargoUpdate = this.handleCargoUpdate.bind(this)
         this.state = {
             loading: true
         }
     }
 
-    deleteCargoHandler(id) {
+    handleCargoDelete(id) {
+        this.setState({ loading: true })
         deleteCargo(id, this.props.token).then(() => {
             this.props.cargoDelete(id)
+            this.setState({ loading: false })
         })
+
     }
 
-    updateCargos() {
+    handleCargoUpdate() {
         this.setState({
             loading: true
         })
@@ -34,25 +39,23 @@ class Cargos extends Component {
     }
 
     componentDidMount() {
-        this.updateCargos()
+        this.handleCargoUpdate()
     }
 
     render() {
         return (
-            <div className="container">
-                <div className="row">
-                    {
-                        this.state.loading ?
-                            <LoadSpinner /> :
-                            this.props.cargos.map((cargo) => {
-                                return <Cargo
-                                    cargo={cargo}
-                                    key={cargo._id}
-                                    onDelete={this.deleteCargoHandler.bind(this)}
-                                    updateHandler={this.updateCargos.bind(this)} />
-                            })
-                    }
-                </div>
+            <div className="container row wrap margin_left_1_5">
+                {
+                    this.state.loading ?
+                        <LoadSpinner /> :
+                        this.props.cargos.map((cargo) => {
+                            return <Cargo
+                                cargo={cargo}
+                                key={cargo._id}
+                                onDelete={this.handleCargoDelete}
+                                updateHandler={this.handleCargoUpdate} />
+                        })
+                }
             </div>
         )
     }
@@ -68,4 +71,4 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps, {
     cargosReceive,
     cargoDelete
-})(Cargos);
+})(CargoContainer);

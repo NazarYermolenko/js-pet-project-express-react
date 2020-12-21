@@ -1,14 +1,24 @@
 import React, { Component } from "react"
-import CargoInfo from "./CargoInfo"
-import ChangeInput from "./ChangeInput"
 import { connect } from "react-redux"
 
+import { Button, InputField } from "../../BaseComponents"
 import { updateCargo } from '../../../utils/CargoUtils'
 
+import "./cargo.scss"
 
 class Cargo extends Component {
     constructor(props) {
         super(props)
+        this.handleClickOnDescription = this.handleClickOnDescription.bind(this)
+        this.handleClickOnDescriptionClose = this.handleClickOnDescriptionClose.bind(this)
+        this.handleClickOnTitle = this.handleClickOnTitle.bind(this)
+        this.handleClickOnTitleClose = this.handleClickOnTitleClose.bind(this)
+        this.handleDescriptionChange = this.handleDescriptionChange.bind(this)
+        this.handleTitleChange = this.handleTitleChange.bind(this)
+        this.handleClickUpdateCargo = this.handleClickUpdateCargo.bind(this)
+        this.handleClickCancelCargoUpdate = this.handleClickCancelCargoUpdate.bind(this)
+        this.handleCargoDelete = this.handleCargoDelete.bind(this)
+
         this.state = {
             isDisplayedTitleInputArea: false,
             isDisplayedDescriptionInputArea: false,
@@ -20,31 +30,43 @@ class Cargo extends Component {
         }
     }
 
-    handleDelete() {
+    handleCargoDelete() {
         this.props.onDelete(this.props.cargo._id)
     }
 
-    handleClick(type) {
-        switch (type) {
-            case 'title': this.setState({ isDisplayedTitleInputArea: true }); break;
-            case 'title-close': this.setState({ isDisplayedTitleInputArea: false }); break;
-            case 'description': this.setState({ isDisplayedDescriptionInputArea: true }); break;
-            case 'description-close': this.setState({ isDisplayedDescriptionInputArea: false }); break;
-            default: this.setState({ isDisplayedDescriptionInputArea: false, isDisplayedTitleInputArea: false })
-        }
+    handleClickOnTitle() {
+        this.setState({ isDisplayedTitleInputArea: true })
     }
 
-    handleChange(type, value) {
-        let updatedCargo = this.state.changedCargo
-        switch (type) {
-            case 'title': updatedCargo.title = value; break;
-            case 'description': updatedCargo.description = value; break;
-            default: updatedCargo.title = this.props.cargo.title;
-        }
+    handleClickOnTitleClose() {
+        this.setState({ isDisplayedTitleInputArea: false })
     }
 
-    handleUpdateCargo() {
+    handleClickOnDescription() {
+        this.setState({ isDisplayedDescriptionInputArea: true })
+    }
+
+    handleClickOnDescriptionClose() {
+        this.setState({ isDisplayedDescriptionInputArea: false })
+    }
+
+    handleTitleChange(e) {
+        this.setState({ changedCargo: { ...this.state.changedCargo, title: e.target.value } })
+    }
+
+    handleDescriptionChange(e) {
+        this.setState({ changedCargo: { ...this.state.changedCargo, description: e.target.value } })
+    }
+
+    handleClickUpdateCargo() {
         updateCargo(this.state.changedCargo, this.props.token).then(() => this.props.updateHandler())
+        this.setState({
+            isDisplayedTitleInputArea: false,
+            isDisplayedDescriptionInputArea: false
+        })
+    }
+
+    handleClickCancelCargoUpdate() {
         this.setState({
             isDisplayedTitleInputArea: false,
             isDisplayedDescriptionInputArea: false
@@ -54,44 +76,29 @@ class Cargo extends Component {
 
     render() {
         return (
-            <div className="card m-3 col-md-12">
-                <div className="card-body p-6">
-                    {(!this.state.isDisplayedTitleInputArea) ?
-                        <CargoInfo
-                            type={"title"}
-                            value={this.props.cargo.title}
-                            clickToChange={this.handleClick.bind(this, "title")}
-                        /> :
-                        <ChangeInput value={this.props.cargo.title}
-                            id={this.props.cargo._id}
-                            type={'title'}
-                            clickCloseHandler={this.handleClick.bind(this, 'title-close')}
-                            changeValueHandler={this.handleChange.bind(this)}
-                        />
-                    }
-                    <div>
-                        {(!this.state.isDisplayedDescriptionInputArea) ?
-                            <CargoInfo
-                                type={'description'}
-                                value={this.props.cargo.description}
-                                clickToChange={this.handleClick.bind(this, "description")}
-                            /> :
-                            <ChangeInput value={this.props.cargo.description}
-                                id={this.props.cargo._id}
-                                type={'description'}
-                                clickCloseHandler={this.handleClick.bind(this, "description-close")}
-                                changeValueHandler={this.handleChange.bind(this)}
-                            />
-                        }
+            <div>
+                <div>
+                    <h2>Title:</h2>
+                    {this.state.isDisplayedTitleInputArea ?
+                        <InputField value={this.state.changedCargo.title}
+                            onChange={this.handleTitleChange} /> :
+                        <p onClick={this.handleClickOnTitle}>{this.props.cargo.title}</p>}
+                </div>
+                <div>
+                    <h2>Description:</h2>
+                    {this.state.isDisplayedDescriptionInputArea ?
+                        <InputField value={this.state.changedCargo.description}
+                            onChange={this.handleDescriptionChange} /> :
+                        <p onClick={this.handleClickOnDescription}>{this.props.cargo.description}</p>}
+                </div>
+                <div className="row">
+                    {(this.state.isDisplayedTitleInputArea || this.state.isDisplayedDescriptionInputArea) ?
                         <div>
-                            <div className="card-action">
-                                {(this.state.isDisplayedTitleInputArea || this.state.isDisplayedDescriptionInputArea) ?
-                                    <button className="btn btn-secondary" onClick={this.handleUpdateCargo.bind(this)}>Update</button>
-                                    : <button className="btn btn-primary" onClick={this.handleDelete.bind(this, this.props.cargo._id)}>Delete</button>
-                                }
-                            </div>
-                        </div>
-                    </div>
+                            <Button text={"Update"} onClick={this.handleClickUpdateCargo} />
+                            <Button className="red" text={"Cancel"} onClick={this.handleClickCancelCargoUpdate} />
+                        </div> :
+                        <div><Button className="red" text={"Delete"} onClick={this.handleCargoDelete} /></div>
+                    }
                 </div>
             </div>
         )

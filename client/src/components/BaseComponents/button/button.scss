@@ -4,10 +4,9 @@ $text-color: darkgrey;
 
 .button {
   position:relative;
-  
   padding:0;
-  width:7rem;
-  height:3rem;
+  width:8rem;
+  height:3.5rem;
   
   border:4px solid black;
   outline:none;
@@ -15,6 +14,10 @@ $text-color: darkgrey;
   border-radius: 20px;
   transition: .13s ease-in-out;
   cursor:pointer;
+
+  &.red {
+    background-color: darkred;
+  }
 
   .button__content{
       font-size: 1.2rem;
