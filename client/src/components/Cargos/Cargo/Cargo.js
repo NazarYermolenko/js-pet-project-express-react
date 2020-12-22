@@ -18,10 +18,17 @@ class Cargo extends Component {
         this.handleClickUpdateCargo = this.handleClickUpdateCargo.bind(this)
         this.handleClickCancelCargoUpdate = this.handleClickCancelCargoUpdate.bind(this)
         this.handleCargoDelete = this.handleCargoDelete.bind(this)
+        this.handleMouseOnTitle = this.handleMouseOnTitle.bind(this)
+        this.handleMouseOutTitle = this.handleMouseOutTitle.bind(this)
+        this.handleMouseOnDescription = this.handleMouseOnDescription.bind(this)
+        this.handleMouseOutDescription = this.handleMouseOutDescription.bind(this)
+
 
         this.state = {
             isDisplayedTitleInputArea: false,
             isDisplayedDescriptionInputArea: false,
+            isMouseOverTitle: false,
+            isMouseOverDescription: false,
             changedCargo: {
                 _id: props.cargo._id,
                 title: props.cargo.title,
@@ -73,27 +80,53 @@ class Cargo extends Component {
         })
     }
 
+    handleMouseOnTitle() {
+        this.setState({ isMouseOverTitle: true })
+    }
+
+    handleMouseOutTitle() {
+        this.setState({ isMouseOverTitle: false })
+    }
+
+    handleMouseOnDescription() {
+        this.setState({ isMouseOverDescription: true })
+    }
+
+    handleMouseOutDescription() {
+        this.setState({ isMouseOverDescription: false })
+    }
+
+    renderChangeItBadge() {
+        return <small className="red"> Change it!</small>
+    }
 
     render() {
         return (
-            <div>
+            <div className="container small margin_left_1_5 offset_top_1_5 box justify_content">
                 <div>
                     <h2>Title:</h2>
                     {this.state.isDisplayedTitleInputArea ?
                         <InputField value={this.state.changedCargo.title}
                             onChange={this.handleTitleChange} /> :
-                        <p onClick={this.handleClickOnTitle}>{this.props.cargo.title}</p>}
+                        <p onClick={this.handleClickOnTitle}
+                            onMouseEnter={this.handleMouseOnTitle}
+                            onMouseLeave={this.handleMouseOutTitle}
+                        >{this.props.cargo.title}{this.state.isMouseOverTitle && this.renderChangeItBadge()}</p>}
+
                 </div>
                 <div>
                     <h2>Description:</h2>
                     {this.state.isDisplayedDescriptionInputArea ?
                         <InputField value={this.state.changedCargo.description}
                             onChange={this.handleDescriptionChange} /> :
-                        <p onClick={this.handleClickOnDescription}>{this.props.cargo.description}</p>}
+                        <p onClick={this.handleClickOnDescription}
+                            onMouseEnter={this.handleMouseOnDescription}
+                            onMouseLeave={this.handleMouseOutDescription}
+                        >{this.props.cargo.description}{this.state.isMouseOverDescription && this.renderChangeItBadge()}</p>}
                 </div>
-                <div className="row">
+                <div className="container">
                     {(this.state.isDisplayedTitleInputArea || this.state.isDisplayedDescriptionInputArea) ?
-                        <div>
+                        <div className="container row justify_content offset_top_1_5">
                             <Button text={"Update"} onClick={this.handleClickUpdateCargo} />
                             <Button className="red" text={"Cancel"} onClick={this.handleClickCancelCargoUpdate} />
                         </div> :

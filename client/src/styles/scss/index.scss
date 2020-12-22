@@ -22,6 +22,10 @@ body {
         flex-direction: column;
         width: 100%;
         
+        &.small {
+            width: 20rem;
+        }
+
         &.medium {
             width: 50%;
         }
@@ -64,6 +68,15 @@ body {
         &.offset_left_1_5{
             margin-left: 1.5rem;
         }
+
+        &.box {
+            padding: 2rem;
+            border: 3px solid black;
+            border-radius: 3rem;
+        }
+    }
+    small.red {
+        color:darkred;
     }
 
     @media (max-width: 300px)  {

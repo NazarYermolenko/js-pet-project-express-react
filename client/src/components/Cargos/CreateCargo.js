@@ -59,8 +59,8 @@ class CreateCargo extends Component {
                             label={"Description"}
                         />
                         <Link to={"/"}>
-                            <div className="container row justify_content offset_top_1_5 offset_left_1_5">
-                                <div>
+                            <div className="container justify_content offset_top_1_5">
+                                <div className="container medium row">
                                     <Button text={"Create Cargo"} onClick={this.handleCargoCreate} />
                                     <Button className="red" text={"Cancel"} />
                                 </div>

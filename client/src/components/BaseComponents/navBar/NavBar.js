@@ -19,20 +19,23 @@ class NavBar extends Component {
     render() {
         return (
             <header>
-                <nav className="navbar navbar-expand navbar-dark bg-dark">
-                    <Link to={"/cargos"} className="navbar-brand col-1">
-                        <strong>Online Shop</strong>
-                    </Link>
-
-                    <div className="offset-sm-9 collapse navbar-collapse">
-                        <ul className="navbar-nav">
-                            <li className="nav-item active">
-                                <Link className="nav-link" to={"/create"}>Create cargo</Link>
-                            </li>
-                            <li className="nav-item active">
-                                <Link to={"/auth"} onClick={this.logoutHandler} className="nav-link">Logout</Link>
-                            </li>
-                        </ul>
+                <nav>
+                    <div className="container row justify-content">
+                        <div className="logo">
+                            <Link to={"/cargos"}>
+                                <strong>Online Shop</strong>
+                            </Link>
+                        </div>
+                        <div className="container row">
+                            <ul>
+                                <li>
+                                    <Link className="nav-link" to={"/create"}>Create cargo</Link>
+                                </li>
+                                <li>
+                                    <Link to={"/auth"} onClick={this.logoutHandler} className="nav-link">Logout</Link>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </nav>
             </header>

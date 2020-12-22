@@ -72,39 +72,41 @@ class Auth extends Component {
 
     render() {
         return (
-            <div className="container center margin_top_15">
-                <PageTitle text={"Authentication Page"} />
-                <div className="container offset_top_1_5">
-                    <div className="middle-containe">
-                        <InputField type={"email"}
-                            onChange={this.emailChangeHandler}
-                            value={this.state.value}
-                            name={"email"}
-                            placeholder="E-mail"
-                            id="email"
-                            label={"E-mail:"}
-                        />
+            <div className="container center">
+                <div className="container center medium margin_top_15">
+                    <PageTitle text={"Authentication Page"} />
+                    <div className="container offset_top_1_5">
+                        <div className="middle-containe">
+                            <InputField type={"email"}
+                                onChange={this.emailChangeHandler}
+                                value={this.state.value}
+                                name={"email"}
+                                placeholder="E-mail"
+                                id="email"
+                                label={"E-mail:"}
+                            />
 
-                        <InputField type={"password"}
-                            onChange={this.passwordChangeHandler}
-                            value={this.state.value}
-                            name={"password"}
-                            placeholder="Password"
-                            id="password"
-                            label={"Password:"}
-                        />
+                            <InputField type={"password"}
+                                onChange={this.passwordChangeHandler}
+                                value={this.state.value}
+                                name={"password"}
+                                placeholder="Password"
+                                id="password"
+                                label={"Password:"}
+                            />
+                        </div>
                     </div>
+                    {(this.state.loading) ?
+                        <LoadSpinner /> :
+                        <div className="container row justify_content offset_top_1_5">
+                            <Button text={"Log In"} onClick={this.clickLogin} />
+                            <Button text={"Register"} className={"red"} onClick={this.clickRegister} />
+                        </div>
+                    }
+                    {
+                        this.state.errorMessage && <Notification text={this.state.errorMessage} />
+                    }
                 </div>
-                {(this.state.loading) ?
-                    <LoadSpinner /> :
-                    <div className="container row justify_content medium offset_top_1_5">
-                        <Button text={"Log In"} onClick={this.clickLogin} />
-                        <Button text={"Register"} onClick={this.clickRegister} />
-                    </div>
-                }
-                {
-                    this.state.errorMessage && <Notification text={this.state.errorMessage} />
-                }
             </div>
         )
     }
